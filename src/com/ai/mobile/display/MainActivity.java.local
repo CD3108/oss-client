@@ -1,0 +1,62 @@
+
+
+import android.os.Bundle;
+import android.view.KeyEvent;
+
+import com.wade.mobile.app.AppRecord;
+import com.wade.mobile.app.MobileUtil;
+import com.wade.mobile.frame.activity.TemplateMainActivity;
+import com.wade.mobile.frame.activity.TemplateMobileActivity;
+import com.wade.mobile.frame.config.ServerConfig;
+import com.wade.mobile.frame.template.TemplateManager;
+import com.wade.mobile.func.MobileUI;
+import com.wade.mobile.ui.comp.dialog.ConfirmBlockDialog;
+import com.wade.mobile.ui.view.FlipperLayout;
+import com.wade.mobile.util.Messages;
+
+public class MainActivity extends TemplateMobileActivity {
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		setTheme(R.style.Theme_Sherlock_Light);
+		//设置本地的密钥
+		TemplateManager.initResKey("abcdefgh");
+		if (AppRecord.isFirst(this) && !MobileUtil.checkWifiActive(this)) {
+			ConfirmBlockDialog dialog = new ConfirmBlockDialog(this, "下载提醒",
+					"即将下载应用资源,连接wifi将为您节省流量,是否继续下载");
+			dialog.show();
+			if (dialog.getResult() == ConfirmBlockDialog.Result.OK) {
+				super.onCreate(savedInstanceState);
+			} else {
+				android.os.Process.killProcess(android.os.Process.myPid());// 同一线程调用会导致异常
+				System.exit(0); // 经典退出
+			}
+		} else {
+			super.onCreate(savedInstanceState);
+		}
+	}
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			FlipperLayout flipperLayout= getFlipperLayout();
+			if(flipperLayout!=null){
+				//回到首页的时候就直接退出应用
+				String indexPage = ServerConfig.getInstance().getValue("indexPage");
+				String tagPage = flipperLayout.getCurrView().getTag().toString();
+				if(flipperLayout.isCanBack()&&!indexPage.equals(tagPage)){
+					flipperLayout.back();
+					return true;
+				}
+			}
+			getWadeMobileClient().shutdownByConfirm(Messages.CONFIRM_CLOSE);
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	protected void initBasePath() {
+		// TODO Auto-generated method stub
+		TemplateManager.initBasePath("assets/");
+	}
+}

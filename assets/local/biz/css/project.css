@@ -1,0 +1,81 @@
+/*查询类*/
+@font-face { font-family:"project"; src:url('../img/project.ttf') format('truetype');}
+.e_ico-conect:before        { content:"\e602";}/*基础*/
+.e_ico-net:before           { content:"\e605";}/*网络*/
+.e_ico-position:before      { content:"\e607";}/*地图*/
+.e_ico-pic:before           { content:"\e606";}/*图片/相机*/
+.e_ico-file:before          { content:"\e604";}/*文件*/
+.e_ico-storage:before       { content:"\e609";}/*存储*/
+.e_ico-component:before     { content:"\e601";}/*UI组件*/
+.e_ico-component-tag:before { content:"\e617";}/*标签组件*/
+.e_ico-qr:before            { content:"\e608";}/*二维码*/
+.e_ico-device:before        { content:"\e603";}/*设备*/
+.e_ico-about:before         { content:"\e600";}/*关于*/
+.e_ico-wade-ob:before       { content:"\e60a";}/*WADE-反色*/
+.e_ico-code:before          { content:"\e60b";}/*代码*/
+.e_ico-chat:before          { content:"\e619";}/*推送*/
+.e_ico-scene:before         { content:"\e618";}/*场景*/
+.e_ico-ui-button:before     { content:"\e60d";}
+.e_ico-ui-form:before       { content:"\e60e";}
+.e_ico-ui-icon:before       { content:"\e60c";}
+.e_ico-ui-list:before       { content:"\e60f";}
+.e_ico-ui-picList:before    { content:"\e610";}
+.e_ico-ui-popup:before      { content:"\e611";}
+.e_ico-ui-progress:before   { content:"\e612";}
+.e_ico-ui-slide:before      { content:"\e613";}
+.e_ico-ui-tab:before        { content:"\e614";}
+.e_ico-ui-tip:before        { content:"\e615";}
+.e_ico-ui-button,
+.e_ico-ui-form,
+.e_ico-ui-icon,
+.e_ico-ui-list,
+.e_ico-ui-picList,
+.e_ico-ui-popup,
+.e_ico-ui-progress,
+.e_ico-ui-slide,
+.e_ico-ui-tab,
+.e_ico-ui-tip,
+.e_ico-chat,
+.e_ico-scene,
+.e_ico-code,
+.e_ico-conect,
+.e_ico-net,
+.e_ico-position,
+.e_ico-pic,
+.e_ico-file,
+.e_ico-storage,
+.e_ico-component-tag,
+.e_ico-component,
+.e_ico-qr,
+.e_ico-device,
+.e_ico-about,
+.e_ico-wade-ob { font-family:"project";}
+.m_nav .e_ico-conect { color:#8fc320;}
+.m_nav .e_ico-net { color:#c37c20;}
+.m_nav .e_ico-position { color:#c33f20;}
+.m_nav .e_ico-photo { color:#0085d0;}
+.m_nav .e_ico-file { color:#e40077;}
+.m_nav .e_ico-storage { color:#1ca98d;}
+.m_nav .e_ico-component { color:#4489ac;}
+.m_nav .e_ico-qr { color:#8fc320;}
+.m_nav .e_ico-ui-button { color:#8fc320;}
+.m_nav .e_ico-ui-form { color:#c37c20;}
+.m_nav .e_ico-ui-icon { color:#c33f20;}
+.m_nav .e_ico-ui-list { color:#0085d0;}
+.m_nav .e_ico-ui-picList { color:#e40077;}
+.m_nav .e_ico-ui-popup { color:#1ca98d;}
+.m_nav .e_ico-ui-progress { color:#4489ac;}
+.m_nav .e_ico-ui-slide { color:#8fc320;}
+.m_nav .e_ico-ui-tab { color:#c37c20;}
+.m_nav .e_ico-ui-tip { color:#c33f20;}
+.m_nav .e_ico-audio { color:#0085d0;}
+.m_nav .e_ico-code { color:#8fc320;}
+.m_nav .e_ico-chat { color:#c37c20;}
+.m_nav .e_ico-scene { color:#c33f20;}
+
+
+
+.m_welcome { background:#333; width:100%; height:100%; color:#fff; overflow:hidden;}
+.m_welcome .slogan { font-family:"project"; text-align:center; margin-top:1.2rem;}
+.m_welcome .slogan:before { content:"\e616"; font-size:4.2rem; color:#d5c463;}
+.m_welcome .logo { overflow:hidden; width:2.6rem; height:0.69rem; background:url(../img/logo.png) no-repeat; background-size:100%; -webkit-background-size:100% 100%; left:50%; margin-left:-1.3rem; position:absolute; bottom:0.5rem;}

@@ -1,0 +1,45 @@
+
+init:
+   [delete] Deleting directory /Users/zsh/Documents/workspace/shanxibaobiao/oss-client/build/gen
+   [delete] Deleting directory /Users/zsh/Documents/workspace/shanxibaobiao/oss-client/build/bin
+    [mkdir] Created dir: /Users/zsh/Documents/workspace/shanxibaobiao/oss-client/build/gen
+    [mkdir] Created dir: /Users/zsh/Documents/workspace/shanxibaobiao/oss-client/build/bin/classes
+    [mkdir] Created dir: /Users/zsh/Documents/workspace/shanxibaobiao/oss-client/build/bin/ipu-client
+
+aapt_gererateR:
+
+BUILD FAILED
+
+/Users/zsh/Documents/workspace/shanxibaobiao/oss-client/build/build.xml:123: Execute failed: java.io.IOException: Cannot run program "D:/Android/sdk/build-tools/19.1.0/aapt": error=2, No such file or directory
+	at org.apache.tools.ant.taskdefs.ExecTask.runExec(ExecTask.java:673)
+	at org.apache.tools.ant.taskdefs.ExecTask.execute(ExecTask.java:496)
+	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:293)
+	at sun.reflect.GeneratedMethodAccessor4.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:106)
+	at org.apache.tools.ant.Task.perform(Task.java:348)
+	at org.apache.tools.ant.Target.execute(Target.java:435)
+	at org.apache.tools.ant.Target.performTasks(Target.java:456)
+	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1405)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1376)
+	at org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)
+	at org.eclipse.ant.internal.launching.remote.EclipseDefaultExecutor.executeTargets(EclipseDefaultExecutor.java:36)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1260)
+	at org.eclipse.ant.internal.launching.remote.InternalAntRunner.run(InternalAntRunner.java:453)
+	at org.eclipse.ant.internal.launching.remote.InternalAntRunner.main(InternalAntRunner.java:140)
+Caused by: java.io.IOException: Cannot run program "D:/Android/sdk/build-tools/19.1.0/aapt": error=2, No such file or directory
+	at java.lang.ProcessBuilder.start(ProcessBuilder.java:1048)
+	at java.lang.Runtime.exec(Runtime.java:620)
+	at org.apache.tools.ant.taskdefs.launcher.Java13CommandLauncher.exec(Java13CommandLauncher.java:58)
+	at org.apache.tools.ant.taskdefs.Execute.launch(Execute.java:428)
+	at org.apache.tools.ant.taskdefs.Execute.execute(Execute.java:442)
+	at org.apache.tools.ant.taskdefs.ExecTask.runExecute(ExecTask.java:629)
+	at org.apache.tools.ant.taskdefs.ExecTask.runExec(ExecTask.java:670)
+	... 16 more
+Caused by: java.io.IOException: error=2, No such file or directory
+	at java.lang.UNIXProcess.forkAndExec(Native Method)
+	at java.lang.UNIXProcess.<init>(UNIXProcess.java:248)
+	at java.lang.ProcessImpl.start(ProcessImpl.java:134)
+	at java.lang.ProcessBuilder.start(ProcessBuilder.java:1029)
+	... 22 more

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.chinaunicom.sxoss.zsjk"
+    android:versionCode="1"
+    android:versionName="2.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="15" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.VIBRATE" /> <!-- 震动权限 -->
+    <uses-feature android:name="android.hardware.camera" /> <!-- 使用照相机权限 -->
+    <uses-feature android:name="android.hardware.camera.autofocus" /> <!-- 自动聚焦权限 -->
+    <uses-permission android:name="android.permission.FLASHLIGHT" /> <!-- 开启闪光灯权限 -->
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" /> <!-- 蓝牙 -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    
+    <!-- NFC -->
+    <uses-permission android:name="android.permission.NFC" />
+    <uses-feature android:name="android.hardware.nfc" android:required="true" />
+
+    <application
+        android:name="com.wade.mobile.frame.MobileApplication"
+        android:allowBackup="false"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" 
+        android:hardwareAccelerated="true"> <!-- Application级应用加速,可以降低到Activity级 -->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="6afee5dced4c3b3a43c0feb11399bded"/>
+        <activity
+            android:name="com.ai.mobile.display.MainActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name="com.wade.mobile.common.nfc.activity.NfcActivity">
+            
+            <!-- <intent-filter>
+                <action android:name="android.nfc.action.TECH_DISCOVERED" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.nfc.action.TECH_DISCOVERED"
+                android:resource="@xml/nfc_tech_filter" />
+
+            <intent-filter>
+                <action android:name="android.nfc.action.TAG_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter> -->
+        </activity>
+        
+        <!-- 注册推送服务 -->
+        <service android:name="com.ai.mobile.im.PushService" android:process=":WmPush" />
+        
+        <!-- 对话框 -->
+        <activity
+            android:name="com.wade.mobile.ui.activity.CustomDialogActivity"
+            android:theme="@style/CustomDialogTheme" >
+        </activity>
+        <!-- 窗口 -->
+        <activity
+            android:name="com.wade.mobile.ui.activity.CustomWindowActivity">
+        </activity>
+        <!-- 侧滑菜单 -->
+        <activity android:name="com.wade.mobile.ui.activity.SlidingMenuActivity"
+            android:theme="@style/SlidingMenuTheme" >
+        </activity>
+        <!-- 蓝牙分享 -->
+        <activity
+            android:name="com.wade.mobile.common.bluetooth.activity.ShareByBluetoothActivity"
+            android:theme="@style/ShareApkDialogTheme" >
+        </activity>
+          <!-- 二维码扫描 -->
+		<!--        
+		<activity
+            android:name="com.wade.mobile.common.scan.activity.CaptureActivity"
+            android:configChanges="orientation|keyboardHidden"   
+            android:screenOrientation="portrait" >
+        </activity> 
+        -->
+        <!-- 单个扫码 -->
+        <activity
+            android:name="com.ipu.scan.activity.CaptureSingleActivity"
+            android:configChanges="orientation|keyboardHidden"   
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 多个扫码 -->
+        <activity
+            android:name="com.ipu.scan.activity.CaptureMultipleActivity"
+            android:configChanges="orientation|keyboardHidden"   
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 音乐播放服务 -->
+        <service android:name="com.wade.mobile.common.audio.play.AudioPlayerService" />
+        <!-- 录制声音
+        <activity
+            android:name="com.wade.mobile.common.audio.activity.AudioRecorderActivity"
+            android:theme="@style/AudioDialogTheme" >
+        </activity> -->
+         <activity
+            android:name="com.wade.mobile.common.simplemedia.activity.SARecorder"
+            android:theme="@style/AudioDialogTheme" >
+        </activity>
+		<!-- 播放音乐 -->
+        <activity
+            android:name="com.wade.mobile.common.audio.activity.AudioPlayerActivity"
+            android:theme="@style/AudioDialogTheme" >
+        </activity>
+        <!-- 标记地图 -->
+        <activity android:name="com.wade.mobile.common.map.activity.MarkMapActivity">
+        </activity>
+        <!-- 通讯录UI -->
+        <activity android:name="com.wade.mobile.common.contacts.activity.ContactsActivity">
+        </activity>
+        <!-- 设定位置 -->
+        <activity
+            android:name="com.wade.mobile.common.map.activity.SelectLocationActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        
+        <!-- 键盘 -->
+        <activity android:name="com.wade.mobile.common.keyboard.KeyboardActivity"
+            android:theme="@android:style/Theme.Translucent">
+        </activity>
+        <!-- 手势锁 -->
+        <activity android:name="com.wade.mobile.common.screenlock.ScreenUnlockActivity" 
+            android:theme="@android:style/Theme.NoTitleBar">
+        </activity> 
+        <activity android:name="com.wade.mobile.common.screenlock.SetScreenLockActivity" 
+            android:theme="@android:style/Theme.NoTitleBar">
+        </activity>
+        
+         <!-- YunBa Start -->
+
+       <!--  <meta-data
+            android:name="YUNBA_APPKEY"
+            android:value="5630418ff085fc471efdf2c9" />
+
+        <service android:name="io.yunba.android.core.YunBaService" >
+        </service>
+
+        <receiver android:name="io.yunba.android.core.YunBaReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver> -->
+        
+        <!-- YunBa End -->
+    </application>
+
+</manifest>

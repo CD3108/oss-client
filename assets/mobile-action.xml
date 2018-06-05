@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+    <!-- MobileBasic -->
+	<action name="call" class="com.wade.mobile.func.MobileBasic" method="call"/>
+	<action name="beep" class="com.wade.mobile.func.MobileBasic" method="beep"/>
+	<action name="sms" class="com.wade.mobile.func.MobileBasic" method = "sms"/>
+	<action name="shock" class="com.wade.mobile.func.MobileBasic" method="shock"/>
+	<!-- MobileApp -->
+	<action name="close" class="com.wade.mobile.func.MobileApp" method="close"/>
+	<action name="logCat" class="com.wade.mobile.func.MobileApp" method="logCat"/>
+	<!-- MobileNetWork -->
+	<action name="httpGet" class="com.wade.mobile.func.MobileNetWork" method="httpGet"></action>
+	<action name="dataRequest" class="com.wade.mobile.func.MobileNetWork" method="dataRequest"/>
+	<action name="httpRequest" class="com.wade.mobile.func.MobileNetWork" method="httpRequest"/>
+	<action name="storageDataByThread" class="com.wade.mobile.func.MobileNetWork" method="storageDataByThread"/>
+	<action name="httpDownloadFile" class="com.wade.mobile.func.MobileNetWork" method = "httpDownloadFile"/>
+	<action name="shareByBluetooth" class="com.wade.mobile.func.MobileNetWork" method="shareByBluetooth"></action>
+	<action name="setSmsListener" class="com.wade.mobile.func.MobileNetWork" method="setSmsListener"></action>
+	<action name="downloadWithServlet" class="com.wade.mobile.func.MobileNetWork" method="downloadWithServlet"></action>
+	<action name="uploadWithServlet" class="com.wade.mobile.func.MobileNetWork" method="uploadWithServlet"></action>
+	<action name="openBrowser" class="com.wade.mobile.func.MobileNetWork" method="openBrowser" ></action>
+	<!-- NFC -->
+	<action name="initNfc" class="com.wade.mobile.func.MobileDevice" method="initNfc"></action>
+	
+	<!-- MobileUI -->
+	<action name="tip" class="com.wade.mobile.func.MobileUI" method="tip"/>
+	<action name="openUrl" class="com.wade.mobile.func.MobileUI" method="openUrl"/>
+	<action name="openPage" class="com.wade.mobile.func.MobileUI" method="openPage"/>
+	<action name="openTemplate" class="com.wade.mobile.func.MobileUI" method="openTemplate"/>
+	<action name="getTemplate" class="com.wade.mobile.func.MobileUI" method="getTemplate"/>
+	<action name="getPage" class="com.wade.mobile.func.MobileUI" method="getPage"/>
+	<action name="back" class="com.wade.mobile.func.MobileUI" method="back"/>
+	<action name="loadingStart" class="com.wade.mobile.func.MobileUI" method="loadingStart"/>
+	<action name="loadingStop" class="com.wade.mobile.func.MobileUI" method="loadingStop"/>
+	<action name="getDate" class="com.wade.mobile.func.MobileUI" method="getDate"/>
+	<action name="getChoice" class="com.wade.mobile.func.MobileUI" method="getChoice"/>
+	<action name="getContactsView" class="com.wade.mobile.func.MobileUI" method="getContactsView"/>
+	
+	<action name="openWindow" class="com.wade.mobile.func.MobileUI" method="openWindow"/>
+	<action name="closeWindow" class="com.wade.mobile.func.MobileUI" method="closeWindow"/>
+	<action name="openDialog" class="com.wade.mobile.func.MobileUI" method="openDialog"/>
+	<action name="closeDialog" class="com.wade.mobile.func.MobileUI" method="closeDialog"/>
+	<action name="openSlidingMenu" class="com.wade.mobile.func.MobileUI" method="openSlidingMenu"/>
+	<action name="closeSlidingMenu" class="com.wade.mobile.func.MobileUI" method="closeSlidingMenu"/>
+	
+	<!-- SoftKeyBoard -->
+	<action name="showKeyBoard" class="com.wade.mobile.func.SoftKeyBoard" method="showKeyBoard"/>
+	<action name="hideKeyBoard" class="com.wade.mobile.func.SoftKeyBoard" method="hideKeyBoard"/>
+	<action name="toggleKeyBoard" class="com.wade.mobile.func.SoftKeyBoard" method="toggleKeyBoard"/>
+	<!-- MobileCamera -->
+	<action name="getPhoto" class="com.wade.mobile.func.MobileCamera" method="getPhoto"/>
+	<action name="getPicture" class="com.wade.mobile.func.MobileCamera" method="getPicture"/>
+	<action name="getBase64Picture" class="com.wade.mobile.func.MobileCamera" method="getBase64Picture"/>
+	<action name="getCompressPicture" class="com.wade.mobile.func.MobileCamera" method="getCompressPicture"/>
+	<!-- MobileInfo -->
+	<action name="getTerminalType" class="com.wade.mobile.func.MobileInfo" method="getTerminalType"/>
+	<action name="getSysInfo" class="com.wade.mobile.func.MobileInfo" method="getSysInfo"/>
+	<action name="getNetInfo" class="com.wade.mobile.func.MobileInfo" method="getNetInfo"/>
+	<!-- SwitchActivity -->
+	<action name="browserFile" class="com.ailk.mobile.client.func.SwitchActivity" method = "browserFile"/>
+	<action name="openDisplayPage" class="com.ailk.mobile.client.func.SwitchActivity" method = "openDisplayPage"/>
+	<!-- MobileMap -->
+	<action name="location" class="com.wade.mobile.func.MobileMap" method="location"/>
+	<action name="markMap" class="com.wade.mobile.func.MobileMap" method="markMap"/>
+	<action name="selectLocation" class="com.wade.mobile.func.MobileMap" method="selectLocation"/>
+	<!-- MobileStorage -->
+	<action name="removeMemoryCache" class="com.wade.mobile.func.MobileStorage" method="removeMemoryCache"></action>
+	<action name="clearMemoryCache" class="com.wade.mobile.func.MobileStorage" method="clearMemoryCache"></action>
+	<action name="setMemoryCache" class="com.wade.mobile.func.MobileStorage" method="setMemoryCache"></action>
+	<action name="getMemoryCache" class="com.wade.mobile.func.MobileStorage" method="getMemoryCache"></action>
+	<action name="setOfflineCache" class="com.wade.mobile.func.MobileStorage" method="setOfflineCache"/>
+	<action name="getOfflineCache" class="com.wade.mobile.func.MobileStorage" method="getOfflineCache"/>
+	<action name="removeOfflineCache" class="com.wade.mobile.func.MobileStorage" method="removeOfflineCache"/>
+	<action name="clearOfflineCache" class="com.wade.mobile.func.MobileStorage" method="clearOfflineCache"/>
+	<!-- MobileFile -->
+	<action name="writeFile" class="com.wade.mobile.func.MobileFile" method="writeFile"></action>
+	<action name="appendFile" class="com.wade.mobile.func.MobileFile" method="appendFile"></action>
+	<action name="readFile" class="com.wade.mobile.func.MobileFile" method="readFile"></action>
+	<action name="openFile" class="com.wade.mobile.func.MobileFile" method="openFile"></action>
+	<action name="deleteFile" class="com.wade.mobile.func.MobileFile" method="deleteFile"></action>
+	<action name="openFile" class="com.wade.mobile.func.MobileFile" method="openFile"/>
+	<action name="getAllFile" class="com.wade.mobile.func.MobileFile" method="getAllFile" />
+	<action name="cleanResource" class="com.wade.mobile.func.MobileFile" method="cleanResource" />
+	<action name="getRelativePath" class="com.wade.mobile.func.MobileFile" method="getRelativePath"/>
+	
+	<!-- added by yangsk -->
+	<action name="openAnimation" class="com.ailk.mobile.client.func.SettingPlugin" method="openAnimation"/>
+	<action name="shutAnimation" class="com.ailk.mobile.client.func.SettingPlugin" method="shutAnimation"/>
+	<action name="setTitleText" class="com.ailk.mobile.client.func.BizPlugin" method="setBizTitle"/>
+	
+	<!-- audio -->
+	<action name="audioRecord" class="com.wade.mobile.func.MobileAudio" method="audioRecord"/>
+	<action name="audioPlay" class="com.wade.mobile.func.MobileAudio" method="audioPlay"/>
+	
+	<!-- video -->
+	<action name="recordVideo" class="com.wade.mobile.func.MobileVideo" method="recordVideo"/>
+	<action name="playVideo" class="com.wade.mobile.func.MobileVideo" method="playVideo"/>
+	
+	<action name="openApp" class="com.ai.mobile.func.OpenOtherApp" method="openApp"></action>
+	
+	<!-- MobileDB -->
+	<action name="execSQL" class="com.wade.mobile.func.MobileDB" method="execSQL"></action>
+	<action name="insert" class="com.wade.mobile.func.MobileDB" method="insert"></action>
+	<action name="delete" class="com.wade.mobile.func.MobileDB" method="delete"></action>
+	<action name="update" class="com.wade.mobile.func.MobileDB" method="update"></action>
+	<action name="select" class="com.wade.mobile.func.MobileDB" method="select"></action>
+	<!-- del by wyj <action name="selectFirst" class="com.wade.mobile.func.MobileDB" method="selectFirst"></action> -->
+	
+	<!-- MobilePush -->
+	<action name="registerForPush" class="com.ai.mobile.im.func.MobilePush" method="registerForPush"></action>
+	<action name="unregisterForPush" class="com.ai.mobile.im.func.MobilePush" method="unregisterForPush"></action>
+	<action name="sendText" class="com.ai.mobile.im.func.MobilePush" method="sendText"></action>
+	<action name="setCallbackForPush" class="com.ai.mobile.im.func.MobilePush" method="setCallbackForPush"></action>
+	<action name="registerForPushWithYunba"    class="com.ai.ipu.mobile.push.YunBaPush" method="registerForPush"></action>
+	<action name="unregisterForPushWithYunba"  class="com.ai.ipu.mobile.push.YunBaPush" method="unregisterForPush"></action>
+	<action name="sendTextWithYunba"           class="com.ai.ipu.mobile.push.YunBaPush" method="sendText"></action>
+	<action name="setCallbackForPushWithYunba" class="com.ai.ipu.mobile.push.YunBaPush" method="setCallbackForPush"></action>
+	
+	<action name="getContacts" class="com.wade.mobile.func.MobileContactDetail" method="getContacts"></action>
+	
+	<!-- keyboard -->
+	<action name="openKeyboard" class="com.wade.mobile.func.MobileKeyboard" method="openKeyboard"></action>
+	
+	<action name="setScreenLock" class="com.wade.mobile.func.MobileScreenLock" method="setScreenLock"></action>
+	<action name="getScreenLockState" class="com.wade.mobile.func.MobileScreenLock" method="getScreenLockState"></action>
+	<action name="screenUnlock" class="com.wade.mobile.func.MobileScreenLock" method="screenUnlock"></action>
+	
+	<action name="openNative" class="com.ai.mobile.func.MobileOpenApp" method="openNative"></action>
+	
+	<!--ScanQR -->
+	<action name="scanQrCode" class="com.ipu.scan.func.IpuScan" method="scanSingle"></action>
+	<action name="scanSingle" class="com.ipu.scan.func.IpuScan" method="scanSingle"></action>
+	<action name="scanMultiple" class="com.ipu.scan.func.IpuScan" method="scanMultiple"></action>
+	<action name="createQrCode" class="com.ipu.scan.func.IpuScan" method="createQrCode"></action>
+</actions>

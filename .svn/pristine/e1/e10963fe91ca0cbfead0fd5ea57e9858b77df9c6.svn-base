@@ -1,0 +1,8 @@
+为减少代码提交产生的冲突问题，该工程忽略了.classpath和project.properties两个配置文件
+.classpath生成方式：
+选中工程->Properties->Java Build Path->Source标签页->Add Folder按钮
+增加src和gen目录，Defaul output folder为bin/classes目录
+
+project.properties生成方式：
+选中工程->Properties->Android
+选定某一版本的Android SDK，同时增加Android Library工程wade-mobile-lib和wade-mobile-common

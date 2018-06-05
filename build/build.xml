@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="apkTargets" default="zipalign"  basedir=".">
+	<record name="D:\123\build.log" loglevel="info" append="no" action="start" />
+	
+	<!-- 根据本地环境设置变量 -->
+	<property name="app.source.path" value="D:\quickStart\111\ipu-client" />
+	<property name="jdk.home" value="C:\Program Files (x86)\Java\jdk1.6.0_10" />
+	<property name="sdk.home" value="D:\Android\sdk" />
+	<property name="ant.path" value="D:\Program Files\apache-ant-1.9.4\lib" />
+	
+	<!-- 如果依赖library，设置library的路径 -->
+	<property name="library-1" value="D:\quickStart\111\wade-mobile-common"/>
+	<property name="library-1-libs" value="${library-1}/libs"/>
+	
+	<property name="library-2" value="D:\quickStart\111\wade-mobile-lib"/>
+	<property name="library-2-libs" value="${library-2}/libs"/>
+	<!-- 
+		1. 在Target- aapt_gererateR 中添加library 
+		2. 在Target- compile 中添加library 
+		3. 在Target- dex 中添加library 
+		4. 在Target- aapt-package-res 中添加library 
+		5. 在Target- apkbuilder 中添加library 
+	 -->
+  
+	<!-- app名字，编译版本 -->
+	<property name="appname" value="ipu-client" />
+	<property name="target" value="android-19" />
+	<property name="android_version" value="4.4" />
+	
+	<!-- 设置SDK地路径 -->
+	<property name="bin.dir" value="${jdk.home}/bin" />
+	<property name="sdk.folder" value="${sdk.home}/platforms/${target}" />
+	<property name="apk.tools" value="${sdk.home}/tools" />
+	<property name="android.tools" value="${sdk.home}/build-tools/19.1.0" />
+	
+	<!-- 设置密钥的存储路径 -->
+	<property name="key.store" value="${app.source.path}/shelomi.keystore" />
+	<property name="key.alias" value="mykey" />
+	<property name="key.store.password" value="1234567890" />
+	<property name="key.alias.password" value="1234567890" />
+	  
+	<property name="output.dir" value="out" />
+
+    <!-- 导入ant指令(If)需要用到第三方jar包ant-contrib.jar -->
+    <!-- <path id="ant.contrib.lib">
+        <fileset dir="${ant.path}">
+            <include name="ant-contrib.jar" />
+        </fileset>
+    </path>
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+        <classpath refid="ant.contrib.lib" />
+    </taskdef> -->
+
+	<!-- 识别编译环境 -->
+	<condition property="exe" value=".exe" else=""><os family="windows" /></condition>
+	<condition property="bat" value=".bat" else=""><os family="windows" /></condition>
+
+    <!-- Tools -->
+	<property name="jarsigner" value="${jdk.home}/bin/jarsigner${exe}" />
+	<property name="aapt" value="${android.tools}/aapt${exe}" />
+	<property name="zipalign" value="${android.tools}/zipalign${exe}" />
+	<property name="aidl" value="${android.tools}/aidl${exe}" />
+	<property name="dx" value="${android.tools}/dx${bat}" />
+	<property name="apk-builder" value="${apk.tools}/apkbuilder${bat}" />
+
+    <property name="android-jar" value="${sdk.folder}/android.jar" />
+    <property name="annotations-jar" value="${sdk.home}/tools/support/annotations.jar" />
+
+    <property name="android-framework" value="${sdk.folder}/framework.aidl" />
+    <property name="proguard-home" value="${sdk.home}/tools/proguard/lib" />
+
+    <!-- some file directory exclude "bin" file, because "bin" file will be changed each loop -->
+    <property name="outdir-gen" value="gen" />
+    <property name="resource-dir" value="res" />
+    <property name="asset-dir" value="assets" />
+    <property name="manifest-xml" value="AndroidManifest.xml" />
+
+	<property name="srcdir" value="src" />
+	<property name="srcdir-ospath" value="${basedir}/${srcdir}" />
+
+	<property name="external-libs" value="libs" />
+	<property name="external-libs-ospath" value="${basedir}/${external-libs}" />
+	
+	<property name="outdir" value="bin" />
+	<property name="outdir-classes" value="${outdir}/classes" />
+	<property name="outdir-classes-ospath" value="${basedir}/${outdir-classes}" />
+
+    <property name="dex-file" value="classes.dex" />
+	<property name="intermediate-dex" value="${outdir}/${appname}/${dex-file}" />
+	<property name="intermediate-dex-ospath" value="${basedir}/${intermediate-dex}" />
+
+    <!-- The final package file to generate -->
+	<property name="resources-package" value="${outdir}/${appname}/${appname}.ap_" />
+	<property name="resources-package-ospath" value="${basedir}/${resources-package}" />
+
+    <!-- The final apk file to generate when use the debug key  -->
+	<property name="out-debug-package" value="${outdir}/${appname}-debug.apk" />
+	<property name="out-debug-package-ospath" value="${basedir}/${out-debug-package}" />
+	
+	<property name="out-unsigned-package" value="${outdir}/${appname}/${appname}-unsigned.apk" />
+	<property name="out-unsigned-package-ospath" value="${basedir}/${out-unsigned-package}" />
+	
+	<property name="out-signed-package" value="${outdir}/${appname}/${appname}-signed.apk" />
+	<property name="out-signed-package-ospath" value="${basedir}/${out-signed-package}" />
+	
+	<property name="zipalign-package-ospath" value="${basedir}/${output.dir}/${appname}_for_android_${android_version}_${output.dir}.apk" />
+	
+
+	<!--1 初始化-->
+	<target name="init">
+		<delete dir="${outdir-gen}" />
+		<delete dir="${outdir}" />
+		<delete file="${basedir}/proguardMapping.txt" />
+		
+		<mkdir dir="${outdir-gen}" />
+		<mkdir dir="${outdir-classes}" />
+		<mkdir dir="${outdir}/${appname}" />
+		<mkdir dir="${basedir}/${output.dir}" />
+	</target>
+
+	<!--2 生成R文件和Manifest.java-->
+  	<target name="aapt_gererateR" depends="init">
+	    <exec executable="${aapt}" failonerror="true">
+			<arg value="package" />
+			<arg value="-m" />
+			<arg value="-J" />
+			<arg value="${outdir-gen}" />
+			<arg value="-M" />
+			<arg value="${manifest-xml}" />
+			<arg value="-S" />
+			<arg value="${resource-dir}" />
+			<!-- 同时需要调用Library的res -->
+			<arg value="-S" />
+			<arg value="${library-1}/${resource-dir}" /><!-- 注意点:同时需要调用Library的res-->
+			
+			<arg value="-S" />
+			<arg value="${library-2}/${resource-dir}" />
+			      
+			<arg value="-I" />
+			<arg value="${android-jar}" />
+			<arg value="--auto-add-overlay" /> <!-- 这个重要，覆盖资源，不然报错-->
+		</exec>
+        <!-- 编译Libray1 的R文件 -->
+		<exec executable="${aapt}" failonerror="true">
+            <arg value="package" />
+            <arg value="-m" />
+            <arg value="--non-constant-id" /> <!-- 加了这个参数-->
+            <arg value="--auto-add-overlay" />
+            <arg value="-J" />
+            <arg value="gen" />
+            <arg value="-M" />
+            <arg value="${library-1}/${manifest-xml}" /> <!-- 库应用的manifest-->
+            <arg value="-S" />
+            <arg value="res" />
+            <arg value="-S" />
+            <arg value="${library-1}/${resource-dir}" />
+            <arg value="-I" />
+            <arg value="${android-jar}" />
+        </exec>
+        
+        <!-- 编译Libray2 的R文件 -->
+        <exec executable="${aapt}" failonerror="true">
+            <arg value="package" />
+            <arg value="-m" />
+            <arg value="--non-constant-id" /> <!-- 加了这个参数-->
+            <arg value="--auto-add-overlay" />
+            <arg value="-J" />
+            <arg value="gen" />
+            <arg value="-M" />
+            <arg value="${library-2}/${manifest-xml}" /> <!-- 库应用的manifest-->
+            <arg value="-S" />
+            <arg value="res" />
+            <arg value="-S" />
+            <arg value="${library-2}/${resource-dir}" />
+            <arg value="-I" />
+            <arg value="${android-jar}" />
+        </exec>
+    </target>
+    
+	<!--3 生成aidl对应的java文件-->
+  	<target name="aidl" depends="aapt_gererateR">
+    	<apply executable="${aidl}" failonerror="true">
+            <arg value="-p${android-framework}" />
+            <arg value="-I${srcdir}" />
+            <arg value="-o${outdir-gen}" />
+            <fileset dir="${srcdir}">
+                <include name="**/*.aidl" />
+            </fileset>
+        </apply>
+    </target>
+
+	<!--4 编译java文件为class文件-->
+	<target name="compile" depends="aidl">
+		<path id="project.libs">
+	        <fileset dir="${external-libs}">
+	            <include name="*.so" />
+	            <include name="**/*.so" />
+	            <include name="*/*.so" />
+	            <include name="**/*.jar" />
+	            <include name="*.jar" />
+	        </fileset>
+		</path>
+	      
+	  	<path id="library-1.libs">
+	         <fileset dir="${library-1-libs}">
+	             <include name="*.so" />
+	             <include name="**/*.so" />
+	             <include name="*/*.so" />
+	             <include name="**/*.jar" />
+	             <include name="*.jar" />
+	         </fileset>
+	    </path>
+	    
+	  	<path id="library-2.libs">
+	          <fileset dir="${library-2-libs}">
+	              <include name="*.so" />
+	              <include name="**/*.so" />
+	              <include name="*/*.so" />
+	              <include name="**/*.jar" />
+	              <include name="*.jar" />
+	          </fileset>
+	    </path>
+	    
+		<javac debug="true" extdirs="" srcdir="." includeantruntime="on" 
+	         destdir="${outdir-classes}" bootclasspath="${android-jar}" encoding="UTF-8">
+	          <compilerarg line="-encoding UTF-8 " />
+	          <src path="${library-1}/${srcdir}" /><!-- Library1的src文件 -->
+	          <src path="${library-2}/${srcdir}" /><!-- Library2的src文件 -->
+	          <src path="${srcdir}" />
+	          <src path="${outdir-gen}" />
+			  <!-- jar文件 -->          
+	          <classpath refid="library-1.libs" />
+	          <classpath refid="library-2.libs" />
+	          <classpath refid="project.libs" />
+		</javac>
+	</target>
+	  
+	<!--5 混淆-->
+	<target name="obfuscate" depends="compile">
+		<jar basedir="${outdir-classes}" destfile="temp.jar" />
+	
+		<java jar="${proguard-home}/proguard.jar" fork="true" failonerror="true">
+	        <jvmarg value="-Dmaximum.inlined.code.length=32" />
+	        <arg value="-injars temp.jar" />
+	        <arg value="-outjars optimized.jar" />
+	        <arg value="-libraryjars '${annotations-jar}'" />
+	        <arg value="-libraryjars '${android-jar}'" />
+	        <arg value="@proguard-project.txt" />
+		</java>
+	    <delete file="temp.jar" />
+	    <delete dir="${outdir-classes}" />
+	    <mkdir dir="${outdir-classes}" />
+		<unzip src="optimized.jar" dest="${outdir-classes}" />
+	    <delete file="optimized.jar" />
+	</target>	
+
+	<!--6 把class文件转换为dex文件-->
+	<target name="dex" depends="compile">
+	    <echo>Packaging dex...</echo>
+		<apply executable="${dx}" failonerror="true" parallel="true">
+		    <arg value="--dex" />
+		    <arg value="--output=${intermediate-dex-ospath}" />
+		    <arg path="${outdir-classes-ospath}" />
+		    <arg path="${external-libs-ospath}" />
+		    
+		    <fileset dir="${external-libs}" />
+		    <!-- Library1 -->
+		    <fileset dir="${library-1-libs}" />
+		    <!-- Library2 -->
+		    <fileset dir="${library-2-libs}" />
+		</apply>
+	</target>
+	
+  	<!--7 aapt打包资源-->
+	<target name="aapt-package-res" depends="dex">
+		<echo>Packaging resources and assets...</echo>
+		<exec executable="${aapt}" failonerror="true">
+		    <arg value="package" />
+		    <arg value="-f" />
+		    <arg value="-M" />
+		    <arg value="${manifest-xml}" />
+		    <arg value="-S" />
+		    <arg value="${resource-dir}" />
+		    
+		    <arg value="-S" />
+	        <arg value="${library-1}/${resource-dir}" /><!-- 包含Library的资源 -->
+	        
+		    <arg value="-S" />
+	        <arg value="${library-2}/${resource-dir}" /><!-- 包含Library2的资源 -->
+		    
+		    <arg value="-A" />
+		    <arg value="${asset-dir}" /><!-- assets文件 -->
+		    
+		    <arg value="-I" />
+		    <arg value="${android-jar}" />
+		    <arg value="-F" />
+		    <arg value="${resources-package}" /><!-- 输出资源压缩包 -->
+		    <arg value="--auto-add-overlay" /> <!-- 这个重要，覆盖资源，不然报错-->
+		</exec>
+	</target>
+
+	<!--8 apkbuilder打包成apk文件-->
+	<target name="apkbuilder" depends="aapt-package-res">
+		<echo>${out-unsigned-package-ospath}</echo>
+        <exec executable="${apk-builder}" failonerror="true">
+            <arg value="${out-unsigned-package-ospath}" /><!-- 输出 -->
+            <arg value="-u" /><!-- 创建未签名的包 -->
+            <arg value="-z" /><!-- 资源压缩包 -->
+            <arg value="${resources-package-ospath}" />
+            <arg value="-f" /><!-- dex文件 -->
+            <arg value="${intermediate-dex-ospath}" />
+            
+            <arg value="-rf" /><!-- Adds the java resources found in that folder -->
+            <arg value="${srcdir-ospath}" />
+            
+            <arg value="-nf" /><!-- add native libraries -->
+            <arg value="${external-libs-ospath}" />
+            <arg value="-nf" />
+            <arg value="${library-1-libs}" />
+            <arg value="-nf" />
+            <arg value="${library-2-libs}" />
+            
+            <arg value="-rj" /><!-- Adds the java resources found in the jar file(s) -->
+            <arg value="${basedir}/${external-libs}" />
+            <arg value="-rj" />
+            <arg value="${library-1-libs}" />
+            <arg value="-rj" />
+            <arg value="${library-2-libs}" />
+        </exec>
+    </target>
+    
+	<!--9 签名apk文件-->
+	<target name="jarsigner" depends="apkbuilder">
+        <exec executable="${jarsigner}" failonerror="true">
+            <arg value="-verbose" />
+            <arg value="-keystore" />
+            <arg value="${key.store}" />
+            <arg value="-storepass" />
+            <arg value="${key.store.password}" />
+            <arg value="-keypass" />
+            <arg value="${key.alias.password}" />
+            <arg value="-signedjar" />
+            <arg value="${out-signed-package-ospath}" />
+            <arg value="${out-unsigned-package-ospath}" />
+            <arg value="${key.alias}" />
+
+            <arg value="-digestalg" />
+            <arg value="SHA1" />
+            <arg value="-sigalg" />
+            <arg value="MD5withRSA" />
+        </exec>
+    </target>
+    
+   <!--10 对apk文件进行zipalign对齐-->
+	<target name="zipalign" depends="jarsigner">
+		<exec executable="${zipalign}" failonerror="true">
+            <arg value="-v" />
+            <arg value="-f" />
+            <arg value="4" />
+            <arg value="${out-signed-package-ospath}" />
+            <arg value="${zipalign-package-ospath}" />
+        </exec>
+        <echo>打包完成：${zipalign-package-ospath}</echo>
+	</target>
+    
+</project>

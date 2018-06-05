@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html class="s_bs">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+	<title>导航</title>
+	<link href="res/css/base.css" rel="stylesheet" type="text/css" />
+	<link href="biz/css/project.css" rel="stylesheet" type="text/css" />
+	<style type="text/css" media="screen">
+		.ub{
+				display: -webkit-box !important;
+				display: box !important;
+				position:relative;
+			}
+			.ub-img
+{
+	-webkit-background-size:contain;
+	background-size:contain;
+	background-repeat:no-repeat;
+	background-position:center;
+}
+
+.ub-img1
+{	
+	-webkit-background-size:cover;
+	background-size:cover;
+	background-repeat:no-repeat;
+	background-position:center;
+}
+	</style>
+</head>
+<body>
+
+<div class="m_welcome ub ub-img1" style="background-image:url('biz/img/startpage.png')">
+	
+</div>
+<script>
+var rootNode = window.document.documentElement;
+function setRatio() {
+	rootNode.style.fontSize = rootNode.offsetHeight / 820 * 100 + "px";
+}
+window.addEventListener("load",setRatio,false);
+window.addEventListener("resize",setRatio,false);
+</script>
+</body>
+</html>

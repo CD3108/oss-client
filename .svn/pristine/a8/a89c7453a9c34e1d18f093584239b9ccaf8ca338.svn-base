@@ -1,0 +1,51 @@
+package com.ai.mobile.display;
+
+import android.content.pm.ActivityInfo;
+import android.os.Bundle;
+
+import com.wade.mobile.app.MobileAppInfo;
+import com.wade.mobile.app.MobileOperation;
+import com.wade.mobile.frame.activity.NetMobileActivity;
+import com.wade.mobile.frame.net.NetWebView;
+import com.wade.mobile.ui.comp.dialog.ConfirmBlockDialog;
+import com.wade.mobile.util.Messages;
+
+public class MainActivity extends NetMobileActivity {
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		setTheme(R.style.Theme_Sherlock_Light);
+		MobileAppInfo appInfo = MobileAppInfo.getInstance(this);
+		if(appInfo.isTablet()){
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+		}else{
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		}
+		super.onCreate(savedInstanceState);
+	}
+	
+	@Override
+	public void onBackPressed() {
+		getWadeMobileClient().shutdownByConfirm(Messages.CONFIRM_CLOSE);
+	}
+	
+	@Override
+	public void loadingError(final NetWebView webView, final int errorCode,
+			final String description, final String failingUrl) {
+		MainActivity.this.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					webView.loadAssetHtml("html/welcome.html");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally{
+					ConfirmBlockDialog dialog = new ConfirmBlockDialog(MainActivity.this, "异常", "资源加载异常，请检查网络与防火墙设置。即将退出应用……" , "确定" , null);
+					dialog.show();
+					if(dialog.getResult() == ConfirmBlockDialog.Result.OK ){
+						MobileOperation.exitApp();
+					}
+				}
+			}
+		});
+	}
+}
